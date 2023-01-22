@@ -7,14 +7,7 @@ on:
 
 jobs:
   build-and-deploy:
-    permissions:
-      pages: write
-      id-token: write
-
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -34,18 +27,8 @@ jobs:
         working-directory: ./web
         run: npm run build
 
-      - name: Upload production-ready build
-        uses: actions/upload-artifact@v2
-        with:
-          name: production-files
-          path: ./web/dist
-
-      - name: Download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: production-files
-          path: ./web/dist
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
+      - name: Deploy Web
+        working-directory: ./web
+        run: npm run deploy
+        env:
+          github_token: ${{ secrets.GITHUB_TOKEN }}

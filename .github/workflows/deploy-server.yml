@@ -30,4 +30,4 @@ jobs:
 
       - name: Running project
         working-directory: ./server
-        run: node ./src/main.js
+        run: node ./src/server.js

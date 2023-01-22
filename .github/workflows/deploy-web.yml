@@ -19,6 +19,12 @@ jobs:
           cache: npm
           cache-dependency-path: '**/package-lock.json'
 
+      - name: Install Dependency Web Version
+        working-directory: ./web
+        run: npm ci
+        env:
+          GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
+
       - name: Deploy Web Version
         working-directory: ./web
         run: npm run build

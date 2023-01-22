@@ -21,6 +21,6 @@ jobs:
 
       - name: Deploy Web Version
         working-directory: ./web
-        run: npm run build --ci
+        run: npm run build
         env:
           GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
